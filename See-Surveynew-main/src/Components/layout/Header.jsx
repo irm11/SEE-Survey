@@ -1,7 +1,18 @@
+import { useState ,useEffect} from "react";
+
 // components/Header.js
 export default function Header() {
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
     return (
-      <div className="bg-white shadow p-4 flex justify-between items-center">
+      <div className="bg-white shadow p-0 flex justify-between items-center">
         <div  className="px-6">
           <img
             src="/Noki.png"
@@ -17,7 +28,7 @@ export default function Header() {
         </div>
         <div className="flex justify-center items-center gap-3">
           <p className="font-semibold">
-            Welcome, <span className="font-bold">Amgad Salem</span>
+            Welcome, <span className="font-bold">{username}</span>
           </p>
           <img
             src="https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg?ga=GA1.1.1906641478.1741525422&semt=ais_hybrid&w=740"

@@ -11,17 +11,17 @@ import {
 
 const SidebarTabs = () => {
   const navItems = [
-    { label: "Site Info", icon: <House size={20} />, path: "/site-info" },
-    { label: "AC Power", icon: <Power size={20} />, path: "/ac-power" },
-    { label: "Room", icon: <Calendar size={20} />, path: "/room" },
-    { label: "Outdoor", icon: <TentTree size={20} />, path: "/outdoor" },
-    { label: "Existing Radio", icon: <RadioTower size={20} />, path: "/existing-radio" },
-    { label: "New Radio", icon: <RadioTower size={20} />, path: "/new-radio" },
+    { label: "Site Info", icon: <House size={20} />, path: "/sites/1/site-info/site-location" },
+    { label: "AC Power", icon: <Power size={20} />, path: "/sites/1/ac-power/ac-info" },
+    { label: "Room", icon: <Calendar size={20} />, path: "/sites/1/room/room-info" },
+    { label: "Outdoor", icon: <TentTree size={20} />, path: "/sites/1/Outdoor/Outdoor_generallayout_info" },
+    { label: "Existing Radio", icon: <RadioTower size={20} />, path: "/sites/1/Existing Radio/Antenna structure info" },
+    { label: "New Radio", icon: <RadioTower size={20} />, path: "/sites/1/NewRadio/Newantennas" },
     { label: "H&S", icon: <CircleHelp size={20} />, path: "/hs" },
   ];
 
   return (
-    <aside className="w-60 bg-white border-r shadow p-4 min-h-screen">
+    <aside className="w-60 bg-white border-r p-4 min-h-screen">
       <nav className="space-y-3">
         {navItems.map(({ label, icon, path }) => (
           <NavLink

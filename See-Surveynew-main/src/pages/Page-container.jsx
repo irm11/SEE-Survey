@@ -1,70 +1,48 @@
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, Suspense } from "react";
+import { tabsConfig } from "../Components/Tabs/Alltabs.jsx";
 
+const PageContainer = () => {
+  const { siteId, pageName, tabKey } = useParams();  // Getting route params
+  const navigate = useNavigate();
+  const tabs = tabsConfig[pageName] || [];  // Get tabs for the current page (e.g. site-info)
 
-// import All forms here 
-import SiteLocationform from "../Components/forms/SiteLocationform.jsx";
+  // Normalize tabKey and find the active tab
+  const normalizedTabKey = tabKey?.toLowerCase();
+  const activeTab = tabs.find(tab => tab.key === normalizedTabKey);
 
-
-const allTabs={
-
-"site-info":[
-    {label:"Site Location",
-     key:"Site Location",
-     form:<SiteLocationform/>
-    },
-    {
-      label:"Site Information",
-      key:"Site Information",
-      form:""
-    },
-    {
-      label:"Site Access",
-      key:"Site Access",
-      form:""
-    },
-    {
-      label:"Site Visit Information",
-      key:"Site Visit Information",
-      form:""
+  useEffect(() => {
+    // If no active tab, navigate to the first tab
+    if (!activeTab && tabs.length > 0) {
+      navigate(`/sites/${siteId}/${pageName}/${tabs[0].key}`, { replace: true });
     }
-    
-],
-
-}
-
-const PageContainer =()=> {
-
- const {pageName}=useParams();
- const tabs=allTabs[pageName]|| [];
-
- const [activeTab, setActiveTab] = useState(tabs.length > 0 ? tabs[0].key : "");
- const currentForm=tabs.find(tab=>tab.key===activeTab)?.form
-
+  }, [activeTab, tabs, siteId, pageName, navigate]);
 
   return (
-    <div>
-
-    <div className="flex gap-2 mb-4 p-0">
+    <div className="p-4">
+      {/* Tab Navigation */}
+      <div className="flex gap-2 mb-4">
         {tabs.map(tab => (
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
-            className={` px-4 py-2 rounded font-bold font-sans border-2 w-50 h-10 overflow-hidden text-center sm: ${activeTab === tab.key ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+            onClick={() => navigate(`/sites/${siteId}/${pageName}/${tab.key}`)}
+            className={`px-4 py-2 border rounded font-semibold ${
+              tab.key === normalizedTabKey ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
           >
             {tab.label}
           </button>
         ))}
       </div>
 
- {/* Show form */}
- <div className=" w-full border p-4 rounded shadow">
-        {currentForm || <div>No form available</div>}
+      {/* Dynamic Form Rendering */}
+      <div className="border p-4 rounded bg-white shadow">
+        <Suspense fallback={<div>Loading...</div>}>
+          {activeTab ? <activeTab.component /> : <div>No form available</div>}
+        </Suspense>
       </div>
     </div>
-  
-    
   );
 };
 
-export default PageContainer
+export default PageContainer;

@@ -187,12 +187,11 @@ const SiteLocationForm = () => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="gap-3 p-6 w-50 h-5 items-center flex text-white bg-blue-600 border rounded"
-          >
-            Save and Continue
-          </button>
+          <div className="md:col-span-2 flex justify-center">
+            <button type="submit" className="px-6 py-3 text-white bg-blue-600 rounded hover:bg-blue-700">
+              Save and Continue
+            </button>
+          </div>
         </form>
 
         {/* Google Map Below Form */}

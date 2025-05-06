@@ -1,8 +1,7 @@
 import Header from "../components/layout/Header.jsx";
 import Slider from "../components/layout/Slider.jsx";
 import React from 'react';
-import RoutesComponent from "../routes/routes.jsx";
-
+import { Outlet } from "react-router-dom";
 function MainLayout() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -20,7 +19,7 @@ function MainLayout() {
 
         {/* Main Content on the right */}
         <div className="flex-1 p-3 overflow-y-auto">
-          <RoutesComponent />
+        <Outlet /> {/* Render child routes here */}
         </div>
       </div>
     </div>
