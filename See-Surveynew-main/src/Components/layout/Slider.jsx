@@ -14,10 +14,10 @@ const SidebarTabs = () => {
     { label: "Site Info", icon: <House size={20} />, path: "/sites/1/site-info/site-location" },
     { label: "AC Power", icon: <Power size={20} />, path: "/sites/1/ac-power/ac-info" },
     { label: "Room", icon: <Calendar size={20} />, path: "/sites/1/room/room-info" },
-    { label: "Outdoor", icon: <TentTree size={20} />, path: "/sites/1/Outdoor/Outdoor_generallayout_info" },
-    { label: "Existing Radio", icon: <RadioTower size={20} />, path: "/sites/1/Existing Radio/Antenna structure info" },
-    { label: "New Radio", icon: <RadioTower size={20} />, path: "/sites/1/NewRadio/Newantennas" },
-    { label: "H&S", icon: <CircleHelp size={20} />, path: "/hs" },
+    { label: "Outdoor", icon: <TentTree size={20} />, path: "/sites/1/outdoor/general-lyout" },
+    { label: "Existing Radio", icon: <RadioTower size={20} />, path: "/sites/1/existing-radio/antennas-strut" },
+    { label: "New Radio", icon: <RadioTower size={20} />, path: "/sites/1/new-radio/new-antennas/" },
+    { label: "H&S", icon: <CircleHelp size={20} />, path: "/sites/1/H&S/h&s" }
   ];
 
   return (
