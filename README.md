@@ -16,4 +16,5 @@ This project is a survey application for collecting and managing site informatio
 2. Install dependencies:
 
 **##. Start the development server:**
+npm install
 npm run dev
