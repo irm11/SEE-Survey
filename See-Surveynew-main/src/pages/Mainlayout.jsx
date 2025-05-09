@@ -1,5 +1,5 @@
-import Header from "../components/layout/Header.jsx";
-import Slider from "../components/layout/Slider.jsx";
+import Header from "../Cmponents/layout/Header.jsx";
+import Slider from "../Components/layout/Slider.jsx";
 import React from 'react';
 import { Outlet } from "react-router-dom";
 function MainLayout() {
