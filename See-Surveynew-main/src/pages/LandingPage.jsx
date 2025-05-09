@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SurveyCardList from "../Components/LandingPageComponents/SurveyCardList.jsx";
 import Createform from "../Components/LandingPageComponents/Createform.jsx";
-import Header from "../components/layout/Header.jsx";
+import Header from "../Cmponents/layout/Header.jsx";
 
 
 const LandingPage = () => {
