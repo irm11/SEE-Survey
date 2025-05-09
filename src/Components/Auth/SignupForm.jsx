@@ -15,6 +15,7 @@ const SignupForm = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,13 +30,18 @@ const SignupForm = () => {
     }
 
     try {
-      const response =await axios.post(" http://localhost:8000/users/api/signup", formData);
+      setLoading(true);  // Start loading spinner
+      await axios.post("http://localhost:8000/users/api/signup", formData);
       localStorage.setItem("username", formData.username);
       setSuccess("Signup successful! Redirecting...");
-     
-      setTimeout(() => navigate('/landingpage'), 3000);
     } catch (err) {
-      setError(err.response?.data?.detail || "Signup failed");
+      console.error("Signup error:", err.message);
+      setError("proceeding to the landing page...");
+    } finally {
+      setTimeout(() => {
+        setLoading(false); // Stop loading spinner
+        navigate('/landingpage');
+      }, 3000);  // Always navigate after 3 seconds, success or fail
     }
   };
 
@@ -43,7 +49,7 @@ const SignupForm = () => {
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
       <div className="text-center mb-6">
         <img src="/Nokia.png" alt="Logo" className="w-50 mx-auto mb-2" />
-        <h1 className="text-2xl font-bold">Welcome to SEE-Suvey</h1>
+        <h1 className="text-2xl font-bold">Welcome to SEE-Survey</h1>
         <p className="text-gray-600">Please fill in your details to sign up</p>
       </div>
 
@@ -53,6 +59,10 @@ const SignupForm = () => {
       >
         {error && <div className="text-red-600 mb-4">{error}</div>}
         {success && <div className="text-green-600 mb-4">{success}</div>}
+        
+        {loading && (
+          <div className="text-blue-600 mb-4">Processing... Please wait...</div>
+        )}
 
         <input
           type="text"
