@@ -82,6 +82,7 @@ const SiteLocationForm = () => {
       <div className="bg-white p-3 rounded-xl shadow-md w-full ">
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8" onSubmit={handleSubmit}>
           {/* Text Fields */}
+          <label className="font-semibold mb-1">Site-Id</label>
           <input
             type="text"
             name="siteId"
@@ -91,6 +92,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">Site Name</label>
           <input
             type="text"
             name="siteName"
@@ -100,6 +102,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">Region</label>
           <input
             type="text"
             name="region"
@@ -109,6 +112,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">City</label>
           <input
             type="text"
             name="city"
@@ -118,6 +122,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">Address</label>
           <input
             type="text"
             name="address"
@@ -127,6 +132,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">Latitude</label>
           <input
             type="Number"
             name="latitude"
@@ -136,6 +142,7 @@ const SiteLocationForm = () => {
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
+          <label className="font-semibold mb-1">Longitude</label>
           <input
             type="number"
             name="longitude"
@@ -144,8 +151,9 @@ const SiteLocationForm = () => {
             onChange={handleInputChange}
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-          />
-           <input
+            />
+          <label className="font-semibold mb-1">Site Elevation</label>
+          <input
             type="number"
             name="siteelevation"
             placeholder="site elevation"
