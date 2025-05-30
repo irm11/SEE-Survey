@@ -37,7 +37,7 @@ const AntennaStructureForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://127.0.0.1:8000/", formData);
+      await axios.post("${import.meta.env.VITE_API_URL}/", formData);
       alert("Antenna structure data submitted successfully!");
     } catch (error) {
       console.error("Submission error:", error);

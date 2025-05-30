@@ -1,22 +1,45 @@
-import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios"; // Make sure to import axios
 
 const SiteLocationForm = () => {
-  const { siteId } = useParams();
+  const { sessionId, siteId } = useParams(); // sessionId and siteId from URL
+  const location = useLocation();
+
+  // Fetch survey details for pre-filling when session ID changes
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/api/sites/${siteId}`)
+      .then(res => {
+        const data = res.data;
+        setFormData({
+          siteId: siteId || data.site_id || "",
+          latitude: data.latitude || "",
+          longitude: data.longitude || "",
+          sitename: data.sitename|| "",
+          region: data.region || "",
+          city: data.city || "",
+          address: data.address || "",
+          frontImage: data.frontImage || null,
+          sideImage: data.sideImage || null,
+          topImage: data.topImage || null,
+          siteelevation: data.site_elevation || ""
+        });
+      })
+      .catch(err => console.error("Error loading survey details:", err));
+  }, [sessionId, siteId]);
+
   const [formData, setFormData] = useState({
-    siteId: siteId, // Using siteId from the URL
+    siteId: siteId || "",
     latitude: "",
     longitude: "",
-    siteName: "",
+    sitename: "",
     region: "",
     city: "",
     address: "",
     frontImage: null,
     sideImage: null,
     topImage: null,
-    siteelevation:""
-    
+    siteelevation: ""
   });
 
   // Handle form submission
@@ -27,8 +50,7 @@ const SiteLocationForm = () => {
     const { frontImage, sideImage, topImage, ...dataWithoutImages } = formData;
 
     const payload = {
-      site_id: dataWithoutImages.siteId,
-      site_name: dataWithoutImages.siteName,
+      site_name: dataWithoutImages.sitename,
       region: dataWithoutImages.region,
       city: dataWithoutImages.city,
       longitude: dataWithoutImages.longitude,
@@ -38,11 +60,10 @@ const SiteLocationForm = () => {
      
     };
 
-    console.log(payload.latitude ,payload.longitude)
     
 
     try {
-      const response=await axios.put(`http://127.0.0.1:8000/site-location/${siteId}`,payload);
+      const response=await axios.put(`${import.meta.env.VITE_API_URL}/api/sites/${siteId}`,payload);
       alert("Data submitted successfully!");
       console.log(response)
     } catch (err) {
@@ -95,7 +116,7 @@ const SiteLocationForm = () => {
             type="text"
             name="siteName"
             placeholder="Site Name"
-            value={formData.siteName}
+            value={formData.sitename}
             onChange={handleInputChange}
             className="border p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required

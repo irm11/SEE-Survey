@@ -1,4 +1,3 @@
-
 import React from "react";
 const SiteLocationForm = React.lazy(() => import("../forms/siteinfo/SiteLocationform.jsx"));
 const SiteVisitInfoForm = React.lazy(() => import("../forms/siteinfo/Site-vistinfoForm.jsx"));

@@ -42,7 +42,7 @@ const SiteLocationForm = () => {
     
 
     try {
-      const response=await axios.put(`http://127.0.0.1:8000/site-location/${siteId}`,payload);
+      const response=await axios.put(`${import.meta.env.VITE_API_URL}/site-location/${siteId}`,payload);
       alert("Data submitted successfully!");
       console.log(response)
     } catch (err) {

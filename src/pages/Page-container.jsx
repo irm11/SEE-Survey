@@ -3,7 +3,7 @@ import { useEffect, Suspense } from "react";
 import { tabsConfig } from "../Components/Tabs/Alltabs.jsx";
 
 const PageContainer = () => {
-  const { siteId, pageName, tabKey } = useParams();  // Getting route params
+  const { sessionId, siteId, pageName, tabKey } = useParams();  // Getting route params
   const navigate = useNavigate();
   const tabs = tabsConfig[pageName] || [];  // Get tabs for the current page (e.g. site-info)
 
@@ -19,13 +19,13 @@ const PageContainer = () => {
   }, [activeTab, tabs, siteId, pageName, navigate]);
 
   return (
-    <div className="p-4">
+    <div className="min-h-screen bg-gray-50 p-4">
       {/* Tab Navigation */}
       <div className="flex gap-2 mb-4">
         {tabs.map(tab => (
           <button
             key={tab.key}
-            onClick={() => navigate(`/sites/${siteId}/${pageName}/${tab.key}`)}
+            onClick={() => navigate(`/sites/${sessionId}/${siteId}/${pageName}/${tab.key}`)}
             className={`px-4 py-2 border rounded font-semibold ${
               tab.key === normalizedTabKey ? "bg-blue-500 text-white" : "bg-gray-200"
             }`}

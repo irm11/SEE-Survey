@@ -44,23 +44,26 @@ const LandingPage = () => {
         {showSurveyOptions && (
           <div className="flex justify-center gap-6 mb-8">
             <button
-              className="bg-blue-400 text-white px-5 py-2 rounded hover:bg-blue-500"
+              className={`px-5 py-2 rounded hover:bg-blue-500 ${activeView === "single" ? "bg-blue-500 text-white" : "bg-blue-400 text-white"}`}
               onClick={() => setActiveView("single")}
             >
               Single Survey
             </button>
             <button
-              className="bg-blue-400 text-white px-5 py-2 rounded hover:bg-blue-500"
-              onClick={() => setActiveView("multiple")}
+              className={`px-5 py-2 rounded hover:bg-blue-500 ${activeView === "bulk" ? "bg-blue-500 text-white" : "bg-blue-400 text-white"}`}
+              onClick={() => setActiveView("bulk")}
             >
-              Multiple Survey
+              Bulk Survey
             </button>
           </div>
         )}
 
-        {/* Conditional Form Render */}
+        {/* Conditional Render for single and bulk */}
         <div className="mb-10">
-          {(activeView === "single" || activeView === "multiple") && <Createform />}
+          {activeView === "single" && <Createform />}
+          {activeView === "bulk" && (
+            <div className="text-center text-gray-600">Bulk survey coming soon...</div>
+          )}
         </div>
 
         {/* Survey List Section */}
